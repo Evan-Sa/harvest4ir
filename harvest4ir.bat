@@ -3,23 +3,7 @@
 :: This script collect some artefact for live response.
 ::
 :: Want to involve to this code ?
-::
-::
-:: #### 			IMPORTANT
-:: When you add a new tools, you have to put the architecture 32 or 64 just before ".exe"
-::
-::
-:: Each line is logged in the file "actions.log" and almost each errors in "errors.log"
-:: Only embedded tools are use to prevent DLL hijack or other thing to hide real results (even CMD.EXE)
-:: For that, use the var %tools% to launch your command and put the executable name after.
-:: After the executable name, put the var %arch%.
-::
-::
-:: The %_line% variable store the command. It is used to pass a parameter to the function :log_actions
-:: This function will log the command in actions.log and check if an error occurred and put it in errors.log
-:: Each command need two more line (every time !!) first, store the command in the var _line and after the command launch, call the function log_actions
-::
-
+:: Please, read the README.txt file !
 
 
 :: --------------------------------------------------------------------------------------------------------------------------
@@ -98,17 +82,15 @@ if not exist %location% (
 	set _line="%tools%wmic%arch% logicaldisk get Description,DriveType,FileSystem,FreeSpace,Name,Size,VolumeName,VolumeSerialNumber | %tools%grep 3"
 	%tools%wmic%arch% logicaldisk get Description,DriveType,FileSystem,FreeSpace,Name,Size,VolumeName,VolumeSerialNumber | %tools%grep 3 >> %actions%
 	call :log_actions
-	call :check_Permissions
 	echo. >> %actions%
+	call :check_Permissions
 	echo __________________________________________________________________________________________ >> %actions%
-	
 	REM Volatile location
 	set _line="%tools%mkdir.exe %location%\volatiles"
 	%tools%mkdir.exe %location%\volatiles
 	call :log_actions
-	
-	:: Be carreful. winpmem is usally detect as a malware...
 
+	:: Be carreful. winpmem is usally detect as a malware...
 	echo Memory dump - First thing to do...  >> %actions%
 	set _line="%tools%winpmem.exe %location%\volatiles\physicaldump.bin"
 	%tools%winpmem.exe %location%\volatiles\physicaldump.bin
@@ -329,7 +311,7 @@ call :archiving
 :check_Permissions
 	echo permissions check >> %actions%
     net session >nul 2>&1
-    if %errorLevel% == 2 (
+    if ERRORLEVEL 2 (
 		echo %timestamp% - Failure: Current permissions inadequate. >> %errors%
 		exit
     ) else (

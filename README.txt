@@ -27,3 +27,9 @@ This function will log the command in actions.log and check if an error occurred
 Each command need two more line (every time !!) first, store the command in the var _line and after the command launch, call the function log_actions
 
 ________________________________________________________________________________________________________________________
+
+Juste after the case folder creation, the mem dump will process.
+Not that, some AV detect winpmem as a malware. Be sure the client will allow this tool.
+
+When the collect is over, a cyphered archive is created. The password is : harvester4ir
+This archive is created with the extension .cab
