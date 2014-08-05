@@ -1,0 +1,72 @@
+
+
+
+
+
+
+Tool's check sum
+
+Sysinternals
+b5484d040b07deb51acffe00f4e4232e	autorunsc.exe
+9d44e45960d5ea7483c1b0e32083e193	handle.exe
+cb623488009f084ec53cb62e45cbcf72	psfile.exe
+7e950f9c644ebc7b8ac4a6d026c06d30	procdump.exe
+ad06aa36e330434560593590330222e6	pslist.exe
+08dadac8c7a951cbec90c10026ba74b3	psloggedon.exe
+0d9540f8ed3ec25cf65b21454bd72123	tcpvcon.exe
+5245f11d3664bb6c5956e58c83bb8c5f	Listdlls.exe
+
+DLLs
+67ec459e42d3081dd8fd34356f7cafc1	msvcr100.dll
+bdaddbfcd1e0133c70f78e6dc7bf5929	zlib.dll
+a5d03926320cb2b8da4164e446e557f1	libewf.dll
+4ec97b29e530556645d2240579bfd3e6	libtsk_jni.dll
+03e9314004f504a14a61c3d364b62f66	msvcp100.dll
+
+Unix tools
+e9757f1678ece31c59997c073a6527a2	cut.exe
+9e05a9c264c8a908a8e79450fcbff047	grep.exe
+06707b6fff48aa962d4865ba033846e2	md5sum.exe
+e58f3cae8cf26f7254708dcc45632827	mkdir.exe
+
+Windows Built-in
+85d5dcf81ae47b68d5dc91255b9ad16f	cmd32.exe
+5746bd7e255dd6a8afa06f7c42c1ba41	cmd64.exe
+a654fdae2f684e25e801a7a664d179c1	robocopy.exe
+9ae9d2bcc12b97f42332df3f8a4084e2	tasklist32.exe
+77f42591de77cc1e2eae8e4933ba64f5	tasklist64.exe
+b229f10011da3625040b3b30a76ff3e6	wmic32.exe
+fd902835deaef4091799287736f3a028	wmic64.exe
+
+Sleuthkit
+b13f553dca55e53c48d343c0b38a0a5c	fls.exe
+
+Misc
+6417aa85c8fe0981bb6ffba1d639b029	densityscout.exe
+78cca5d8663f8cddf97eef82db578634	RawCopy.au3
+af9d38ac6163f20c8871d5528834d623	rawcopy32.exe
+7b85df37791626d9239a204fcc1d6448	rawcopy64.exe
+ac7b1be097a4aae32683f87a5cea8b81	winpmem-1.4.1.zip
+
+
+rar
+2d33aae61fab14135d08acb37a0f7ec7	Rar.exe
+da40953da8bdfcd6a8a91510487a5420	RarExt.dll
+e8cf8b9143918375b2c08375f90ec03b	RarExt64.dl
+aab5ebc5bd643e841c97b73fd24b3508	winrar.rcf
+
+
+rar/format
+995e32816fd7c6ddbf492f87adc8c145	7z.fmt
+6458f2604d28713c4f00492b22f602c1	7zxa.dll
+2d3fa60d3e7579ac9e45ec1db7f27057	ace.fmt
+456603cb634faa56f0603ba758475246	arj.fmt
+30ddd664b909af20ae8ceea59c8ea60e	bz2.fmt
+b59abd0918120b43e866b17100d29674	cab.fmt
+01cfaeed15f6a6c47846807ff6f6602f	gz.fmt
+d6bf07ce6ef4196887a97be29cd749cf	iso.fmt
+d2b491c5541538371e4ceb49209ac73c	lzh.fmt
+692e9335b118351035defdc7556b4d55	tar.fmt
+de02c4d04088b69e64ecc30a3d9e22e5	UNACEV2.DLL
+3422424b54d58a055741395d5aef94ba	uue.fmt
+41e4d397ef19e7050d3aa764f12b7d49	z.fmt
