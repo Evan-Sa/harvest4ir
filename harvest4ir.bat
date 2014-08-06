@@ -328,8 +328,6 @@ REM call :debug
 	cd "%location%"
 	
 	
-	
-	
 	echo. >> %actions%
 	echo .................................................................................................... >> %actions%
 	echo 									END of Script   >> %actions%
@@ -345,7 +343,7 @@ call :archiving
 	REM Function to log what happened
 	REM For each action, please log the command in the "_line" var et after the command launch, call :log_actions
 	call :timestamp
-	if %ERRORLEVEL% NEQ 0 (
+	if ERRORLEVEL 0 (
 		echo %timestamp% - ERRORLEVEL : %ERRORLEVEL% - %_line% >> %errors%
 	) else (
 		echo %timestamp% - %_line% >> %actions%
