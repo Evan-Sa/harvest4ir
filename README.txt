@@ -6,7 +6,10 @@
 \_| |_/\__,_|_|    \_/ \___||___/\__|   |_/\___/\_| \_|
                                                        
                                                        
-Please note that it is not for a comercial use. 
+Please note that it is not for a comercial use.
+
+Mathieu Guerin
+mathieu.l.guerin@gmail.com
 ________________________________________________________________________________________________________________________
 
 IMPORTANT :

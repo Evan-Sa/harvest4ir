@@ -26,6 +26,7 @@ if %os% == legacy (
 	set application=AppEvent.evt
 	set system=SysEvent.evt
 	set security=SecEvent.evt
+	set userpath=%systemdrive%\Documents and Settings
 ) else (
 	set _path=%~dp0
 	REM Events logs
@@ -33,6 +34,7 @@ if %os% == legacy (
 	set application=Application.evtx
 	set system=System.evtx
 	set security=Security.evtx
+	set userpath=%systemdrive%\Users
 )
 
 REM Timestamp creation
@@ -285,6 +287,41 @@ REM call :debug
 	call :log_actions
 	
 
+	REM Going to the userpath location
+	cd "%userpath%"
+	:: The for loop below locates and copies out every ntuser.dat file
+	for /f "tokens=*" %%i in ('dir /ah /b /s ntuser.dat') do @for /f "tokens=3 delims=\" %%j in ("%%i") do @for /f "tokens=4 delims=\" %%h in ("%%i") do (
+		if not exist %location%\non-volatiles\registry\%%j (
+			set _line="%tools%mkdir %location%\non-volatiles\registry\%%j"
+			%tools%mkdir %location%\non-volatiles\registry\%%j
+			call :log_actions
+		)
+		set _line="%tools%rawcopy%arch% "%%i" %location%\non-volatiles\registry\%%j"
+		%tools%rawcopy%arch% "%%i" %location%\non-volatiles\registry\%%j
+		call :log_actions
+	)
+	:: The for loop below locates and copies out every usrclass.dat file
+	REM Actually does not works with Win 8
+	if NOT %os% == legacy (
+		for /f %%i in ('dir /ah /b /s usrclass.dat') do @for /f "tokens=3 delims=\" %%j in ("%%i") do @for /f "tokens=8 delims=\" %%h in ("%%i") do (
+			if not exist %location%\non-volatiles\registry\%%j (
+				set _line="%tools%mkdir %location%\non-volatiles\registry\%%j"
+				%tools%mkdir %location%\non-volatiles\registry\%%j
+				call :log_actions
+			)
+			set _line="%tools%rawcopy%arch% "%%i" %location%\non-volatiles\registry\%%j"
+			%tools%rawcopy%arch% "%%i" %location%\non-volatiles\registry\%%j
+			call :log_actions
+		)
+	)
+	
+
+	REM Get back to the location
+	cd "%location%"
+	
+	
+	
+	
 	echo. >> %actions%
 	echo .................................................................................................... >> %actions%
 	echo 									END of Script   >> %actions%
@@ -336,6 +373,7 @@ echo					DEBUGGING
 echo ....................................................................................................
 
 	REM Please, uncomment the call function and put your code here to test it.
+
 
 exit
 
