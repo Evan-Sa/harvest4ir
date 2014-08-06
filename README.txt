@@ -32,4 +32,4 @@ Juste after the case folder creation, the mem dump will process.
 Not that, some AV detect winpmem as a malware. Be sure the client will allow this tool.
 
 When the collect is over, a cyphered archive is created. The password is : harvester4ir
-This archive is created with the extension .cab
+This archive is created with the extension .cab but it is a rar file.
