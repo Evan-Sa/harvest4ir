@@ -139,6 +139,11 @@ if not exist %location% (
 	set _line="%tools%mkdir.exe %location%\non-volatiles\files"
 	%tools%mkdir.exe %location%\non-volatiles\files
 	call :log_actions
+	
+	set _line="%tools%mkdir %location%\non-volatiles\prefetch"
+	%tools%mkdir %location%\non-volatiles\prefetch
+	call :log_actions
+	
 )
 
 REM echo ....................................................................................................
@@ -219,6 +224,12 @@ REM call :debug
 	echo. >> %actions%
 	
 
+	REM Copies out the prefefiles
+	set _line="robocopy %SystemRoot%\Prefetch %location%\non-volatiles\prefetch /ZB /copy:DAT /r:0 /ts /FP /np /mt:5 /log:%location%\non-volatiles\prefetch\prefetch-robocopy-log.txt"
+	robocopy %SystemRoot%\Prefetch %location%\non-volatiles\prefetch /ZB /copy:DAT /r:0 /ts /FP /np /mt:5 /log:%location%\non-volatiles\prefetch\prefetch-robocopy-log.txt
+	call :log_actions
+	
+	
 	%tools%wmic%arch% logicaldisk get DriveType,Name,VolumeName| %tools%grep 3 | %tools%cut -d: -f1 > %location%\non-volatiles\temp.txt
 	for /f "tokens=2 delims= " %%i in (%location%\non-volatiles\temp.txt) do (
 		echo Collecting data from drive %%i>>%actions%
@@ -314,8 +325,6 @@ REM call :debug
 			call :log_actions
 		)
 	)
-	
-
 	REM Get back to the location
 	cd "%location%"
 	
@@ -374,6 +383,7 @@ echo ...........................................................................
 
 	REM Please, uncomment the call function and put your code here to test it.
 
+	
 
 exit
 
