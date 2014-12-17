@@ -1,4 +1,5 @@
 @echo off
+mode con: cols=15 lines=1
 :: 
 :: This script collect some artefact for live response.
 ::
@@ -43,7 +44,6 @@ set location=%_path%%archive%
 REM logs location
 set actions=%location%\actions.log
 set errors=%location%\errors.log
-
 :main
 
 :: --------------------------------------------------------------------------------------------------------------------------
@@ -83,6 +83,7 @@ if not exist %location% (
 	set _line="%tools%wmic%arch% logicaldisk get Description,DriveType,FileSystem,FreeSpace,Name,Size,VolumeName,VolumeSerialNumber | %tools%grep 3"
 	%tools%wmic%arch% logicaldisk get Description,DriveType,FileSystem,FreeSpace,Name,Size,VolumeName,VolumeSerialNumber | %tools%grep 3 >> %actions%
 	call :log_actions
+	
 	echo. >> %actions%
 	call :check_Permissions
 	echo __________________________________________________________________________________________ >> %actions%
@@ -90,8 +91,8 @@ if not exist %location% (
 	set _line="%tools%mkdir.exe %location%\volatiles"
 	%tools%mkdir.exe %location%\volatiles
 	call :log_actions
-
-	:: Be carreful. winpmem is usally detect as a malware...
+	
+	:: Be carreful. winpmem is usally detected as a malware...
 	echo Memory dump - First thing to do...  >> %actions%
 	set _line="%tools%winpmem.exe %location%\volatiles\physicaldump.bin"
 	%tools%winpmem.exe %location%\volatiles\physicaldump.bin
@@ -214,7 +215,6 @@ REM call :debug
 		REM %tools%procdump.exe /accepteula -ma %%k %location%\volatiles\processes\dumps\%%j-%%k.dmp
 	REM )
 
-	
 :non_volatile_data
 	echo. >> %actions%
 	echo .................................................................................................... >> %actions%
@@ -223,7 +223,7 @@ REM call :debug
 	echo. >> %actions%
 	
 
-	REM Copies out the prefefiles
+	REM Copies out the prefetch files
 	set _line="robocopy %SystemRoot%\Prefetch %location%\non-volatiles\prefetch /ZB /copy:DAT /r:0 /ts /FP /np /mt:5 /log:%location%\non-volatiles\prefetch\prefetch-robocopy-log.txt"
 	robocopy %SystemRoot%\Prefetch %location%\non-volatiles\prefetch /ZB /copy:DAT /r:0 /ts /FP /np /mt:5 /log:%location%\non-volatiles\prefetch\prefetch-robocopy-log.txt
 	call :log_actions
@@ -338,14 +338,16 @@ echo ___________________________________________________________________________
 
 call :archiving
 
-
 :log_actions
 	REM Function to log what happened
 	REM For each action, please log the command in the "_line" var et after the command launch, call :log_actions
-	call :timestamp
-	if ERRORLEVEL 0 (
+	if %ERRORLEVEL% NEQ  0 (
+		call :timestamp
+		echo %timestamp% - ERRORLEVEL : %ERRORLEVEL% - %_line%
 		echo %timestamp% - ERRORLEVEL : %ERRORLEVEL% - %_line% >> %errors%
 	) else (
+		call :timestamp
+		echo %timestamp% - %_line%
 		echo %timestamp% - %_line% >> %actions%
 	)
 	goto :EOF
@@ -388,6 +390,7 @@ exit
 echo "Archiving...">>%actions%
 set _line="%tools%rar\Rar.exe a -dw -hpharvester4ir -id -r %_path%%archive%.cab %location%"
 call :log_actions
-%tools%rar\Rar.exe a -dw -hpharvester4ir -id -r %_path%%archive%.cab %location%
+%tools%rar\Rar.exe a -dw -hpHarvester4ir -id -r %_path%%archive%.cab %location%
+rd /s /q %location%
 exit
 
