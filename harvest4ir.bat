@@ -1,5 +1,6 @@
 @echo off
 mode con: cols=15 lines=1
+
 :: 
 :: This script collect some artefact for live response.
 ::
